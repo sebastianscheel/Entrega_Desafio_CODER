@@ -1,5 +1,6 @@
 from django.shortcuts import render
 from django.contrib import messages
+from django.db.models import Q
 
 from my_app1.models import Cliente
 from my_app1.forms import ClienteForm

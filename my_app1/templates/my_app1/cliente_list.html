@@ -1,41 +1,60 @@
-{% extends 'home/index.html' %}
-{% load static %}
+{% extends 'home/index.html' %} 
+{% load static %} 
 
 {% block my_app1_content %}
-<h1>Listado Clientes</h1>
-    <div class="row col-12 justify-content-end mb-2 pr-0">
-        <a class="btn btn-success col-md-2" href="{% url 'my_app1:cliente_add' %}">Agregar Nuevo</a>
-        <p></p>
-    </div>
-    <div class="container">
-        <table class="table table-striped-columns">
-        <thead>
-          <tr>
-            <th scope="col">ID</th>
-            <th scope="col">Nombre</th>
-            <th scope="col">Apellido</th>
-            <th scope="col">Direccion</th>
-            <th scope="col">Teléfono</th>
-            <th scope="col">Correo</th>
-            <th scope="col">Empresa</th>
-            <th scope="col">boton</th>
-          </tr>
-        </thead>
-        <tbody>
-            {%for cliente in clientes%}
-                <tr>
-                    <th scope="row">{{cliente.id}}</th>
-                    <td>{{cliente.name}}</td>
-                    <td>{{cliente.last_name}}</td>
-                    <td>{{cliente.address}}</td>
-                    <td>{{cliente.phone_namber}}</td>
-                    <td>{{cliente.email}}</td>
-                    <td>{{cliente.company}}</td>
-                    <td>BOTON_EDIT</td>
-                </tr>
-            {% endfor %}
-        </tbody>
-        </table>
-    </div>
-    
+<!-- Buscador -->
+<div class="row col-12 justify-content-end mb-2 pr-0">
+    <!-- Buscador -->
+    <form action="../../form-result.php" method="post" target="_blank">
+      <p>
+        <h2>Buscador de clientes:</h2> <input type="search" name="busquedacodigo" size="16rem" maxlength="35">    
+        <input type="submit" value="Buscar">    
+      </p>
+    </form>
+</div>
+<!-- Divider-->
+<hr class="my-4" />
+
+<!-- Listado Clientes-->
+<h2>Listado Clientes</h2>
+<div class="row col-12 justify-content-end mb-2 pr-0">
+  <a class="btn btn-success col-md-2" href="{% url 'my_app1:cliente_add' %}"
+    >Agregar Nuevo</a>
+
+  <p></p>
+</div>
+</div>
+<div class="container">
+  <table class="table table-striped-columns">
+    <thead>
+      <tr>
+        <th scope="col">ID</th>
+        <th scope="col">Nombre</th>
+        <th scope="col">Apellido</th>
+        <th scope="col">Direccion</th>
+        <th scope="col">Teléfono</th>
+        <th scope="col">Correo</th>
+        <th scope="col">Empresa</th>
+        <th scope="col">boton</th>
+      </tr>
+    </thead>
+    <tbody>
+      {%for cliente in clientes%}
+      <tr>
+        <th scope="row">{{cliente.id}}</th>
+        <td>{{cliente.name}}</td>
+        <td>{{cliente.last_name}}</td>
+        <td>{{cliente.address}}</td>
+        <td>{{cliente.phone_namber}}</td>
+        <td>{{cliente.email}}</td>
+        <td>{{cliente.company}}</td>
+        <td>BOTON_EDIT</td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+</div>
+<!-- Divider-->
+<hr class="my-3" />
+
 {% endblock %}
