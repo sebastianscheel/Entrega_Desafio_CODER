@@ -4,6 +4,7 @@ from django.contrib import messages
 from my_app1.models import Cliente
 from my_app1.forms import ClienteForm
 
+
 def create_client (request):
     if request.method == "POST":
         cliente_form = ClienteForm(request.POST)
