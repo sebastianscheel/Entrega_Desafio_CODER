@@ -1,3 +1,4 @@
+from django.http import HttpResponse
 from django.shortcuts import render
 from django.contrib import messages
 from django.db.models import Q
@@ -60,3 +61,14 @@ def clientes(request):
         context={"clientes": Cliente.objects.all()},
         template_name="my_app1/cliente_list.html",
     )
+    
+def search_client(request):
+    
+    if request.GET["busqueda"]:
+        cliente=request.GET["busqueda"]
+        clientes=Cliente.objects.filter(name__icontrains=cliente)
+        return render(request, "my_app1/cliente_list.html",{"clientes":clientes,"query":cliente})
+    else:
+        mensaje=" Sin nada"
+   
+    return HttpResponse(mensaje)
