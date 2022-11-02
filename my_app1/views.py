@@ -56,19 +56,26 @@ def create_client (request):
     )
     
 def clientes(request):
-    return render(
-        request=request,
-        context={"clientes": Cliente.objects.all()},
-        template_name="my_app1/cliente_list.html",
-    )
     
-def search_client(request):
-    
-    if request.GET["busqueda"]:
-        cliente=request.GET["busqueda"]
-        clientes=Cliente.objects.filter(name__icontrains=cliente)
-        return render(request, "my_app1/cliente_list.html",{"clientes":clientes,"query":cliente})
-    else:
-        mensaje=" Sin nada"
-   
-    return HttpResponse(mensaje)
+    if request.method == 'GET':
+        return render(
+            request=request,
+            context={"clientes": Cliente.objects.all()},
+            template_name="my_app1/cliente_list.html",
+        )
+    if request.method == 'POST':
+        buscar = request.POST.get("busqueda")
+        clientes = Cliente.objects.all()
+        if buscar:
+            clientes = Cliente.objects.filter(
+                Q(name__icontains = buscar) |
+                Q(last_name__icontains = buscar) |
+                Q(address__icontains = buscar) |
+                Q(phone_namber__icontains = buscar) |
+                Q(company__icontains = buscar)
+            )
+        return render(
+            request=request,
+            context={"clientes": clientes},
+            template_name="my_app1/cliente_list.html",
+        )

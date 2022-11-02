@@ -2,34 +2,20 @@
 {% load static %} 
 
 {% block my_app1_content %}
-{% block my_app1_buscar%}
-<!-- Buscador -->
 <div class="row col-12 justify-content-end mb-2 pr-0">
-    <!-- Buscador -->
-    <form action="{% url 'my_app1:cliente_list' %}" method="GET">
-      <p>
-        <h2>Buscador de clientes:</h2> 
-        <input type="text" name="busqueda" size="20rem" maxlength="25" >    
-        <input type="submit" value="Buscar">    
-      </p>
-    </form>
+  <!-- Buscador -->
+  <form action="" method="POST">
+    {% csrf_token %}
+    <p>
+      <h2>Buscador de clientes:</h2> 
+      <input type="text" name="busqueda" size="20rem" maxlength="25" >    
+      <input type="submit" value="Buscar">    
+    </p>
+  </form>
 </div>
-{% if clientes %}
-<p>Se encontro: {{clientes|length}} clientes</p>
-<ul>
-  {% for cliente in clientes %}
-    <li>
-      {{cliente.name}}
-    </li>
-  {% endfor %}
-</ul>
-{% else %}
-  <p>No existe</p>
-{% endif %}
-{% endblock %}
+
 <!-- Divider-->
 <hr class="my-4" />
-
 <!-- Listado Clientes-->
 <h2>Listado Clientes</h2>
 <div class="row col-12 justify-content-end mb-2 pr-0">
